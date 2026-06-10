@@ -1,0 +1,64 @@
+{
+  "name": "system-monitor",
+  "displayName": "System Monitor",
+  "description": "在 VS Code 侧边栏以仪表盘查看 CPU、RAM、存储、网络和每个 GPU 状态。",
+  "version": "0.0.18",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:systemMonitor.view"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "systemMonitor",
+          "title": "System Monitor",
+          "icon": "resources/monitor.svg"
+        }
+      ]
+    },
+    "views": {
+      "systemMonitor": [
+        {
+          "id": "systemMonitor.view",
+          "name": "系统监控",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "systemMonitor.refresh",
+        "title": "刷新系统监控"
+      }
+    ],
+    "configuration": {
+      "title": "System Monitor",
+      "properties": {
+        "systemMonitor.refreshInterval": {
+          "type": "number",
+          "default": 2000,
+          "minimum": 500,
+          "description": "系统监控刷新间隔，单位毫秒。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3"
+  }
+}
